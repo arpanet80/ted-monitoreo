@@ -1,0 +1,202 @@
+<div align="center">
+    <mat-spinner *ngIf="loading" diameter="40" class="spinner"></mat-spinner>
+  </div>
+
+  <!-- <section *ngIf="!loading" class="margin-content  content"> -->
+
+  <div class="margin-content  content">
+
+
+    <div class="container-fluid">
+
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <!-- <div class="row animated fadeIn" style="margin-left: 100px; margin-right: 100px;"> -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3 *ngIf="resumenAsistencias">{{resumenAsistencias.asignados}}</h3>
+
+              <p>Tikets asignados
+
+              </p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3 *ngIf="resumenAsistencias">{{resumenAsistencias.resueltos}}</h3>
+              <!-- <h3>53<sup style="font-size: 20px">%</sup></h3> -->
+
+              <p>Tikets resueltos</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3 *ngIf="resumenAsistencias">{{resumenAsistencias.pedientes + resumenAsistencias.iniciadas}}</h3>
+
+              <p>Tikets pendientes</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3 *ngIf="resumenAsistencias">{{resumenAsistencias.asignados + resumenAsistencias.pedientes + resumenAsistencias.resueltos +  resumenAsistencias.iniciadas}}</h3>
+
+              <p>Total Tikets</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- Small boxes (Stat box) -->
+
+
+      <!-- Nueva solicitud de asistencia -->
+      <div class="row">
+        <button mat-raised-button (click)="openDialog(0)" class="bg-success">Nueva Solicitud de Asistencia Tecnia</button>
+      </div>
+      <br>
+
+      <!-- Main row -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+
+            <div class="card-title">
+              <div class="row">
+                <div class="col-8">
+                  <div  class="centrar-vertical">
+                    <!-- <label id="">Seleccione tipo de filtro:</label> -->
+                    <mat-radio-group (change)="radioChange($event,sort)" aria-label="Select an option" >
+                      <mat-radio-button checked="true" value="1">Todo</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <mat-radio-button value="2">Pendientes</mat-radio-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <mat-radio-button value="3">Atendidos</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div>
+
+                    <!-- Filtro -->
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort class="custom-table">
+
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th style="width: 50px;" mat-header-cell *matHeaderCellDef mat-sort-header>Tiket </th>
+                    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                  </ng-container>
+
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="titulo">
+                    <th style="width: 400px;" mat-header-cell *matHeaderCellDef mat-sort-header>Titulo Solicitud </th>
+                    <td mat-cell *matCellDef="let row"> {{row.titulo.toUpperCase()}}</td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="prioridad">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Pioridad </th>
+                    <td mat-cell *matCellDef="let row"> {{row.prioridad}} </td>
+                  </ng-container>
+
+                  <!-- Estado Column -->
+                  <!-- <ng-container matColumnDef="estadoasistencia">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado </th>
+                    <td mat-cell *matCellDef="let row"> {{row.estadoasistencia}} </td>
+                  </ng-container> -->
+
+                  <ng-container matColumnDef="estadoasistencia">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado </th>
+                    <td mat-cell *matCellDef="let row">
+
+                      <!-- ------------------------------- -->
+                      <!-- Los estado estadoasistencia
+                      Harcodeados hay que cambiar -->
+                      <button [ngClass]="{'Asignada' : 'btn-asignada', 'Pendiente' : 'btn-pendiente', 'Iniciada' : 'btn-pendiente', 'Resuelto' : 'btn-resuelto'}[row.estadoasistencia]">{{row.estadoasistencia}}</button>
+                      <!-- ------------------------------- -->
+                    </td>
+                  </ng-container>
+
+
+                  <!-- Fruit Column -->
+                  <ng-container matColumnDef="fechasolicitud">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Sol. </th>
+                    <td mat-cell *matCellDef="let row"> {{row.fechasolicitud}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="responsable">
+                    <th style="width: 260px;" mat-header-cell *matHeaderCellDef mat-sort-header>Tecnico Asignado </th>
+                    <td mat-cell *matCellDef="let row"> {{row.responsable.toUpperCase()}} </td>
+                  </ng-container>
+
+                  <!-- Columna -->
+                  <ng-container matColumnDef="acciones">
+                    <th style="width: 200px; text-align: center;" mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let row" style="text-align: right;">
+                      <button mat-button (click)="openDialog(row.id)" class="btn btn-outline-success edit-btn">Editar</button>
+                      <!-- <button mat-button (click)="deleteRecord(row.member_id)">Delete</button>
+                      <button mat-button (click)="editRecord(row.member_id)">Edit</button> -->
+                    </td>
+
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+                  
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" aria-label="Seleccione paginas"></mat-paginator>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </section> -->
+
+  <!--
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field> -->

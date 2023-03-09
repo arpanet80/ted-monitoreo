@@ -1,0 +1,157 @@
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
+    <a routerLink="/dashboard" class="navbar-brand pointer">
+      <img src="assets/img/oeph2.png" alt="Dante Logo" class="brand-image  elevation-3" style="width: 148px; height: 40px;">
+    </a>
+
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+    <!--------------- consume las opciones desde el servicio ----------------------->
+    <!--<ul *ngFor="let menu of _menu.menu" class="navbar-nav">
+       <li *ngIf="userToken.rol.includes('Admin')" class="nav-item d-none d-sm-inline-block">
+        <a routerLinkActive="active" [routerLink]="[menu.url]" class="nav-link pointer">{{menu.titulo }}</a>
+       </li> -->
+
+      <!-- El icono de mnu -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li> -->
+
+      <!--            Administrador = 1
+                      Tecnico = 2
+                      Usuario = 3
+      -->
+
+      <li class="nav-item d-none d-sm-inline-block">
+        <a routerLinkActive="Active" routerLink="/dashboard" class="nav-link pointer">INICIO</a>
+      </li>
+      <li *ngIf="userToken.idRol.includes('3') || userToken.idRol.includes('1')"  class="nav-item d-none d-sm-inline-block">
+        <a routerLinkActive="active" routerLink="/asistencias" class="nav-link pointer">ASISTENCIA TECNICA</a>
+      </li>
+      <li *ngIf="userToken.idRol.includes('2') || userToken.idRol.includes('1')"  class="nav-item d-none d-sm-inline-block">
+        <a routerLinkActive="active" routerLink="/asistenciastecnico" class="nav-link pointer">ASISTENCIAS ASIGNADAS TECNICO</a>
+      </li>
+      <li *ngIf="userToken.idRol.includes('1')"  class="nav-item d-none d-sm-inline-block">
+        <a routerLinkActive="active" routerLink="/asistenciasadmin"  class="nav-link pointer">ADMINISTRAR SISTEMA</a>
+      </li>
+
+
+      <!-- <li *ngIf="userToken.rol.includes('Admin')" class="nav-item d-none d-sm-inline-block">
+        <a routerLinkActive="active" routerLink="/dashboard"  class="nav-link pointer">REPORTES INFRA</a>
+      </li> -->
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+      <!-- Navbar Search -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li> -->
+
+
+      <!-- Notifications Dropdown Menu -->
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li> -->
+
+      <!-- Dropdown user menu -->
+      <li class="nav-item dropdown user-menu">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" >
+
+          <img src="assets/img/dante.png" class="user-image img-circle elevation-2" alt="" style="background-color: rgb(247, 243, 243);">
+          <!--
+          <img [src]="userToken.imagenperfil" class="user-image img-circle elevation-2" alt="" style="background-color: rgb(247, 243, 243);">
+          -->
+
+          <!-- <span class="d-none d-md-inline">Alexander Pierce</span> -->
+        </a>
+        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <!-- User image -->
+          <li class="user-header bg-primary">
+
+            <img src="assets/img/dante.png" class="img-circle elevation-2" alt=""  style="background-color: rgb(247, 243, 243);">
+            <!--
+            <img [src]="userToken.imagenperfil" class="img-circle elevation-2" alt=""  style="background-color: rgb(247, 243, 243);">
+            -->
+
+            <h4>
+              {{userToken.nombres.toUpperCase()}}
+              <br>
+              <small>{{userToken.cargo.toUpperCase()}}</small>
+              <br>
+              <small>{{userToken.seccion.toUpperCase()}}</small>
+            </h4>
+          </li>
+          <!-- Menu Body -->
+          <!-- <li class="user-body">
+            <div class="row">
+              <div class="col-4 text-center">
+                <a href="#">Followers</a>
+              </div>
+              <div class="col-4 text-center">
+                <a href="#">Sales</a>
+              </div>
+              <div class="col-4 text-center">
+                <a href="#">Friends</a>
+              </div>
+            </div>
+          </li> -->
+          <!-- Menu Footer-->
+          <li class="user-footer">
+            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+            <!-- <li><a (click)="_usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Logout</a> -->
+            <a (click)="_usuarioService.logout()" class="pointer btn btn-default btn-flat float-right">Cerrar sesion</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Pantalla completa -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+  <!-- /.navbar -->

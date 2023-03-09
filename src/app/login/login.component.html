@@ -1,0 +1,25 @@
+<div class="body">
+  <div class="login">
+    <mat-spinner *ngIf="loading" diameter="40" class="spinner"></mat-spinner>
+
+    <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="login()">
+      <img src="assets/img/ted.png" alt="" width="50%" height="80%">
+      <h2 class="h3 mb-3 fw-normal">Inicie sesion</h2>
+      <mat-form-field class="ancho" appearance="fill">
+        <mat-label>Usuario</mat-label>
+        <input matInput required formControlName="usuario">
+      </mat-form-field>
+      <mat-form-field class="ancho" appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" required formControlName="password">
+      </mat-form-field>
+      <br>
+      <button [disabled]="form.invalid" type="submit" class="ancho" mat-raised-button mat-button color="primary">Ingresar</button>
+      <div class="form-group m-b-0">
+        <div class="col-sm-12 text-center">
+          No tienes una cuenta? <a [routerLink]="['/register']" class="text-info m-l-5"><b>Registrate</b></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

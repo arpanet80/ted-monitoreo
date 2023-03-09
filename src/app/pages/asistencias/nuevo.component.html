@@ -1,0 +1,99 @@
+<h1 mat-dialog-title>Solicitar Asistencia Tecnica</h1>
+
+<mat-dialog-content>
+
+  <form [formGroup]="form">
+    <div>
+
+        <input hidden="true" formControlName="id" matInput >
+        <input hidden="true" formControlName="idpersonal" matInput >
+        <input hidden="true" formControlName="idestadoasistencia" matInput >
+
+        <div class="row">
+          <div class="col-7">
+            <label id="">Nombre:</label>
+            <mat-form-field  style="width: 100%;">
+              <input matInput readonly value="{{ userToken.nombres.toUpperCase()}}">
+            </mat-form-field>
+          </div>
+          <div class="col-3">
+
+          </div>
+          <div class="col-2">
+            <label id="">Tiket #:</label>
+            <mat-form-field  style="width: 100%;">
+              <input formControlName="idmostrado" matInput readonly [value]="data.id">
+            </mat-form-field>
+          </div>
+        </div>
+
+
+    </div>
+    <mat-grid-list cols="2" rowHeight="300px">
+      <mat-grid-tile>
+        <div>
+          <mat-form-field style="width: 100%;">
+            <textarea formControlName="titulo" matInput placeholder="Titulo Solicitud" cdkTextareaAutosize
+              cdkAutosizeMinRows="6"></textarea>
+          </mat-form-field>
+
+          <mat-form-field style="width: 70%;">
+            <mat-label>Tipo de asistencia</mat-label>
+            <mat-select formControlName="idtipoasistencia">
+              <mat-option *ngFor="let item of tipoasistencia" [value]="item.id">
+                {{item.tipoasistencia}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field  style="width: 70%;">
+            <mat-label>Equipo</mat-label>
+            <mat-select formControlName="idtipoequipo">
+              <mat-option *ngFor="let item of tipoequipo" [value]="item.id">
+                {{item.tipoequipo}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field style="width: 100%;">
+            <textarea formControlName="descripcion" matInput placeholder="Descripcion del problema" cdkTextareaAutosize
+              cdkAutosizeMinRows="6"></textarea>
+          </mat-form-field>
+
+          <mat-form-field >
+            <mat-label>Prioridad</mat-label>
+            <mat-select formControlName="idprioridad">
+              <mat-option *ngFor="let item of prioridad" [value]="item.id">
+                {{item.prioridad}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field >
+            <mat-label>Origen Solicitud</mat-label>
+            <mat-select formControlName="idorigensolicitud">
+              <mat-option *ngFor="let item of origen" [value]="item.id">
+                {{item.origen}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions [align]="'end'">
+  <button mat-raised-button  class="bg-success" (click)="registtrarAsistencia()">Guardar</button>
+  <!-- <button mat-raised-button color="accent" mat-dialog-close>Cancelar</button> -->
+  <button mat-raised-button color="accent" (click)="closeDialog()">Cancelar</button>
+  <!-- Agrgar mat-dialog-close para cerrar el modal sin control -->
+
+</mat-dialog-actions>
